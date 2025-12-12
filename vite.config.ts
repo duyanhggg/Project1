@@ -18,6 +18,15 @@ export default defineConfig(({ mode }) => {
         alias: {
           '@': path.resolve(__dirname, '.'),
         }
+      },
+      build: {
+        rollupOptions: {
+          onwarn(warning, warn) {
+            // Bỏ qua warnings
+            if (warning.code === 'UNUSED_EXTERNAL_IMPORT') return
+            warn(warning)
+          }
+        }
       }
     };
 });
